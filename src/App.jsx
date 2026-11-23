@@ -16,6 +16,7 @@ import {
   Award
 } from 'lucide-react';
 import { MENU_CATEGORIES, MENU_ITEMS, TESTIMONIALS } from './data/menuData';
+import { StructuredDataSection } from '@/components/sections/StructuredDataSection';
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -83,6 +84,7 @@ export default function App() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-300">
             <a href="#inicio" className="hover:text-amber-400 transition-colors">Inicio</a>
             <a href="#carta" className="hover:text-amber-400 transition-colors">Nuestra Carta</a>
+            <a href="#cocteles" className="hover:text-amber-400 transition-colors">Cocktails</a>
             <a href="#historia" className="hover:text-amber-400 transition-colors">Filosofía</a>
             <a href="#opiniones" className="hover:text-amber-400 transition-colors">Opiniones</a>
             <a href="#contacto" className="hover:text-amber-400 transition-colors">Ubicación</a>
@@ -124,6 +126,13 @@ export default function App() {
               className="py-2 text-stone-200 hover:text-amber-400 transition-colors"
             >
               Nuestra Carta
+            </a>
+            <a 
+              href="#cocteles" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 text-stone-200 hover:text-amber-400 transition-colors"
+            >
+              Cocktails
             </a>
             <a 
               href="#historia" 
@@ -321,6 +330,9 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* Cocktails & Signature Drinks Section */}
+        <StructuredDataSection />
 
         {/* Philosophy / About Section */}
         <section id="historia" className="py-24 bg-stone-950">
