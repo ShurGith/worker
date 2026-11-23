@@ -58,22 +58,22 @@ export default function App() {
       {/* Top Notification Bar */}
       <div className="bg-amber-600/10 border-b border-amber-600/20 py-2 px-4 text-center text-xs md:text-sm text-amber-200/90 flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-        <span>Nueva carta de temporada ya disponible • Menú degustación con maridaje todos los fines de semana</span>
+        <span>Nueva carta de temporada ya disponible. Menú degustación con maridaje todos los fines de semana</span>
       </div>
 
       {/* Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-stone-950/85 border-b border-stone-800/80 transition-all">
+      <header className="sticky top-0 z-50 bg-stone-950 border-b border-stone-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-900/30 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center group-hover:scale-105 transition-transform">
               <UtensilsCrossed className="w-5 h-5 text-stone-950 stroke-[2.2]" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-2xl font-bold tracking-tight text-stone-100">
                 el<span className="text-amber-500">Rest</span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-stone-400 font-medium">
+              <span className="text-xs text-stone-400 font-medium">
                 Gastronomía de Autor
               </span>
             </div>
@@ -92,7 +92,7 @@ export default function App() {
           <div className="flex items-center gap-4">
             <a 
               href="#reservar" 
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-semibold text-sm shadow-md shadow-amber-950/50 hover:shadow-amber-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold text-sm transition-colors"
             >
               <Calendar className="w-4 h-4" />
               <span>Reservar Mesa</span>
@@ -100,7 +100,7 @@ export default function App() {
 
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="md:hidden p-2 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800 focus:outline-none"
+              className="md:hidden p-2 rounded-lg text-stone-400 hover:text-white hover:bg-stone-800"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
@@ -149,7 +149,7 @@ export default function App() {
             <a 
               href="#reservar" 
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 w-full text-center py-3 rounded-xl bg-amber-500 text-stone-950 font-bold shadow-lg"
+              className="mt-2 w-full text-center py-3 rounded-xl bg-amber-500 text-stone-950 font-bold"
             >
               Reservar Mesa
             </a>
@@ -165,22 +165,21 @@ export default function App() {
             <img 
               src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2000&q=85" 
               alt="Ambiente del restaurante elRest" 
-              className="w-full h-full object-cover object-center scale-105 filter brightness-40"
+              className="w-full h-full object-cover object-center brightness-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-transparent"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-stone-950"></div>
+            <div className="absolute inset-0 bg-stone-950/50"></div>
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Pill badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-medium mb-6 shadow-xl backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-medium mb-6">
               <Award className="w-4 h-4 text-amber-400" />
               <span>Experiencia culinaria mediterránea contemporánea</span>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15]">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.15] [overflow-wrap:break-word]">
               Sabores auténticos, <br />
-              <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent italic">
+              <span className="text-amber-400">
                 momentos inolvidables
               </span>
             </h1>
@@ -192,13 +191,13 @@ export default function App() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a 
                 href="#reservar" 
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-base shadow-xl shadow-amber-950/60 hover:shadow-amber-500/20 transition-all transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-base transition-colors"
               >
                 Reservar una Mesa
               </a>
               <a 
                 href="#carta" 
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-stone-900/80 hover:bg-stone-800 text-stone-200 border border-stone-700/80 hover:border-stone-500 font-semibold text-base backdrop-blur-sm transition-all"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-stone-500 font-semibold text-base transition-colors"
               >
                 Explorar la Carta
               </a>
@@ -208,19 +207,19 @@ export default function App() {
             <div className="mt-16 pt-8 border-t border-stone-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div>
                 <p className="font-serif text-3xl font-bold text-amber-400">+12</p>
-                <p className="text-xs text-stone-400 mt-1 uppercase tracking-wider">Años de Tradición</p>
+                <p className="text-xs text-stone-400 mt-1">Años de Tradición</p>
               </div>
               <div>
                 <p className="font-serif text-3xl font-bold text-amber-400">100%</p>
-                <p className="text-xs text-stone-400 mt-1 uppercase tracking-wider">Producto Local</p>
+                <p className="text-xs text-stone-400 mt-1">Producto Local</p>
               </div>
               <div>
                 <p className="font-serif text-3xl font-bold text-amber-400">+120</p>
-                <p className="text-xs text-stone-400 mt-1 uppercase tracking-wider">Vinos de Selección</p>
+                <p className="text-xs text-stone-400 mt-1">Vinos de Selección</p>
               </div>
               <div>
                 <p className="font-serif text-3xl font-bold text-amber-400">4.9 ★</p>
-                <p className="text-xs text-stone-400 mt-1 uppercase tracking-wider">Valoración Media</p>
+                <p className="text-xs text-stone-400 mt-1">Valoración Media</p>
               </div>
             </div>
           </div>
@@ -230,7 +229,7 @@ export default function App() {
         <section id="carta" className="py-24 bg-stone-900/60 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <span className="text-amber-500 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+              <span className="text-amber-400 font-semibold text-sm">
                 Propuesta Gastronómica
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-stone-100 mt-2 mb-4">
@@ -247,9 +246,9 @@ export default function App() {
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all ${
+                  className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-colors ${
                     activeCategory === category.id
-                      ? 'bg-amber-500 text-stone-950 font-semibold shadow-lg shadow-amber-500/20'
+                      ? 'bg-amber-500 text-stone-950 font-semibold'
                       : 'bg-stone-800/80 text-stone-400 hover:text-stone-200 hover:bg-stone-700/80 border border-stone-800'
                   }`}
                 >
@@ -263,7 +262,7 @@ export default function App() {
               {filteredItems.map(item => (
                 <div 
                   key={item.id}
-                  className="group bg-stone-900 border border-stone-800/80 rounded-2xl overflow-hidden hover:border-amber-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-950/20 flex flex-col"
+                  className="group bg-stone-900 border border-stone-800/80 rounded-2xl overflow-hidden hover:border-amber-500/40 transition-colors duration-300 flex flex-col"
                 >
                   {/* Dish Image */}
                   <div className="relative h-56 sm:h-60 overflow-hidden bg-stone-800">
@@ -273,7 +272,7 @@ export default function App() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
-                    <div className="absolute top-3 right-3 bg-stone-950/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-400 text-xs font-semibold border border-stone-700">
+                    <div className="absolute top-3 right-3 bg-stone-950/80 px-3 py-1 rounded-full text-amber-400 text-xs font-semibold border border-stone-700">
                       {item.tag}
                     </div>
                   </div>
@@ -299,7 +298,7 @@ export default function App() {
                         {item.dietary.map((d, index) => (
                           <span 
                             key={index} 
-                            className="text-[11px] font-medium px-2 py-0.5 rounded bg-stone-800 text-stone-300"
+                            className="text-xs font-medium px-2 py-0.5 rounded bg-stone-800 text-stone-300"
                           >
                             {d}
                           </span>
@@ -315,7 +314,7 @@ export default function App() {
             </div>
 
             {/* Chef suggestion note */}
-            <div className="mt-14 p-6 rounded-2xl bg-gradient-to-r from-stone-900 to-stone-900/40 border border-stone-800 text-center max-w-2xl mx-auto">
+            <div className="mt-14 p-6 rounded-2xl bg-stone-900 border border-stone-800 text-center max-w-2xl mx-auto">
               <p className="text-stone-300 text-sm">
                 ¿Tienes alguna alergia o intolerancia alimentaria? Consúltanos. Disponemos de carta específica con detalle de los 14 alérgenos y opciones adaptadas.
               </p>
@@ -329,17 +328,17 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Image Collage */}
               <div className="relative">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-stone-800">
+                <div className="relative rounded-2xl overflow-hidden border border-stone-800">
                   <img 
                     src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=1000&q=80" 
                     alt="Chef cocinando en elRest" 
                     className="w-full h-[450px] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-stone-950/20"></div>
                 </div>
 
                 {/* Floating highlight badge */}
-                <div className="absolute -bottom-6 -right-2 sm:right-6 bg-stone-900/90 backdrop-blur-md border border-amber-500/30 p-5 rounded-2xl shadow-xl max-w-xs">
+                <div className="absolute -bottom-6 -right-2 sm:right-6 bg-stone-900/90 border border-amber-500/30 p-5 rounded-2xl max-w-xs">
                   <div className="flex items-center gap-3">
                     <div className="p-3 bg-amber-500/10 rounded-xl text-amber-400">
                       <Heart className="w-6 h-6 fill-amber-500/20" />
@@ -354,7 +353,7 @@ export default function App() {
 
               {/* Text content */}
               <div className="space-y-6">
-                <span className="text-amber-500 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+                <span className="text-amber-400 font-semibold text-sm">
                   Nuestra Filosofía
                 </span>
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-stone-100 leading-tight">
@@ -397,7 +396,7 @@ export default function App() {
         <section id="opiniones" className="py-24 bg-stone-900/40 border-y border-stone-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="text-amber-500 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+              <span className="text-amber-400 font-semibold text-sm">
                 Testimonios
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-100 mt-2 mb-4">
@@ -421,7 +420,7 @@ export default function App() {
                         <Star key={i} className="w-4 h-4 fill-amber-400" />
                       ))}
                     </div>
-                    <p className="text-stone-300 text-sm sm:text-base italic leading-relaxed mb-6">
+                    <p className="text-stone-300 text-sm sm:text-base leading-relaxed mb-6">
                       "{t.comment}"
                     </p>
                   </div>
@@ -431,7 +430,7 @@ export default function App() {
                       <h4 className="font-semibold text-stone-100 text-sm">{t.name}</h4>
                       <p className="text-xs text-stone-400">{t.role}</p>
                     </div>
-                    <span className="text-[11px] text-stone-500">{t.date}</span>
+                    <span className="text-xs text-stone-500">{t.date}</span>
                   </div>
                 </div>
               ))}
@@ -442,9 +441,9 @@ export default function App() {
         {/* Reservation Section */}
         <section id="reservar" className="py-24 bg-stone-950 relative">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-gradient-to-b from-stone-900 to-stone-900/90 border border-stone-800 rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden">
+            <div className="bg-stone-900 border border-stone-800 rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden">
               <div className="text-center max-w-xl mx-auto mb-10">
-                <span className="text-amber-500 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+                <span className="text-amber-400 font-semibold text-sm">
                   Mesa Garantizada
                 </span>
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-3">
@@ -477,7 +476,7 @@ export default function App() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Name */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Nombre Completo *
                       </label>
                       <input 
@@ -486,13 +485,13 @@ export default function App() {
                         placeholder="Ej. Sofía Martín"
                         value={reservationData.name}
                         onChange={(e) => setReservationData({ ...reservationData, name: e.target.value })}
-                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors"
                       />
                     </div>
 
                     {/* Phone */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Teléfono de Contacto *
                       </label>
                       <input 
@@ -501,20 +500,20 @@ export default function App() {
                         placeholder="+34 600 000 000"
                         value={reservationData.phone}
                         onChange={(e) => setReservationData({ ...reservationData, phone: e.target.value })}
-                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors"
                       />
                     </div>
 
                     {/* Guests */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Número de Comensales *
                       </label>
                       <div className="relative">
                         <select 
                           value={reservationData.guests}
                           onChange={(e) => setReservationData({ ...reservationData, guests: e.target.value })}
-                          className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors appearance-none"
+                          className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors appearance-none"
                         >
                           <option value="1">1 Persona</option>
                           <option value="2">2 Personas (Mesa íntima)</option>
@@ -530,7 +529,7 @@ export default function App() {
 
                     {/* Date */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Fecha *
                       </label>
                       <input 
@@ -538,19 +537,19 @@ export default function App() {
                         required
                         value={reservationData.date}
                         onChange={(e) => setReservationData({ ...reservationData, date: e.target.value })}
-                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors"
                       />
                     </div>
 
                     {/* Time */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Turno / Hora *
                       </label>
                       <select 
                         value={reservationData.time}
                         onChange={(e) => setReservationData({ ...reservationData, time: e.target.value })}
-                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors"
                       >
                         <optgroup label="Almuerzo">
                           <option value="13:30">13:30 h</option>
@@ -569,7 +568,7 @@ export default function App() {
 
                     {/* Email */}
                     <div>
-                      <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                      <label className="block text-xs font-medium text-stone-300 mb-2">
                         Correo Electrónico
                       </label>
                       <input 
@@ -577,14 +576,14 @@ export default function App() {
                         placeholder="tu@email.com"
                         value={reservationData.email}
                         onChange={(e) => setReservationData({ ...reservationData, email: e.target.value })}
-                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors"
+                        className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors"
                       />
                     </div>
                   </div>
 
                   {/* Notes */}
                   <div>
-                    <label className="block text-xs font-medium text-stone-300 uppercase tracking-wider mb-2">
+                    <label className="block text-xs font-medium text-stone-300 mb-2">
                       Peticiones especiales o intolerancias (Opcional)
                     </label>
                     <textarea 
@@ -592,18 +591,18 @@ export default function App() {
                       placeholder="Indícanos si celebráis alguna ocasión especial o si tenéis alergias alimentarias..."
                       value={reservationData.notes}
                       onChange={(e) => setReservationData({ ...reservationData, notes: e.target.value })}
-                      className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-colors resize-none"
+                      className="w-full bg-stone-950/80 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:border-amber-500 transition-colors resize-none"
                     ></textarea>
                   </div>
 
                   <div className="pt-2 text-center">
                     <button 
                       type="submit"
-                      className="w-full sm:w-auto px-10 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-stone-950 font-bold text-base shadow-xl shadow-amber-950/60 hover:shadow-amber-500/20 transition-all transform hover:-translate-y-0.5"
+                      className="w-full sm:w-auto px-10 py-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors text-stone-950 font-bold text-base"
                     >
                       Confirmar Reserva de Mesa
                     </button>
-                    <p className="text-[11px] text-stone-500 mt-3">
+                    <p className="text-xs text-stone-500 mt-3">
                       Cancelación gratuita con hasta 2 horas de antelación.
                     </p>
                   </div>
