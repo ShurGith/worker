@@ -1,0 +1,202 @@
+
+This is a restaurant menu section with a vertical layout. It contains: 1. A large heading at the top 2. A full-width wide banner image below the heading 3. A 2-column grid of menu items below the i...
+
+---
+
+## Reference implementation
+
+**Do not copy its look verbatim.** Use it for layout, structure, content and motion; adapt the colours, fonts and sizes to match the project's existing design. Keep the animation and scroll mechanics (sticky, pinned, scrubbed, timings, easing) exactly as written — if the code uses a package, install it.
+
+```tsx
+StructuredDataSection.tsx
+/**
+ * @fonts Inter Tight
+ */
+import * as React from 'react';
+
+const menuItems = [
+  {
+    name: 'Peach Blossom',
+    price: '$32',
+    description: 'Gin, elderflower liqueur, fresh lime juice, lavender syrup',
+  },
+  {
+    name: 'Lavender Mist',
+    price: '$30',
+    description: 'Gin, lavender syrup, fresh lime juice, soda water',
+  },
+  {
+    name: 'Mint Cloud',
+    price: '$34',
+    description: 'White rum, fresh mint, lime juice, coconut cream',
+  },
+  {
+    name: 'Rose Garden',
+    price: '$35',
+    description: 'Gin, rose syrup, grapefruit juice, elderflower liqueur',
+  },
+  {
+    name: 'Blue Lagoon',
+    price: '$32',
+    description: 'Vodka, blue curaçao, lemonade, lime juice',
+  },
+  {
+    name: 'Lemon Velvet',
+    price: '$30',
+    description: 'Limoncello, fresh lemon juice, sparkling water, sugar rim',
+  },
+  {
+    name: 'Sunset Spritz',
+    price: '$40',
+    description: 'Aperol, prosecco, orange juice, soda water',
+  },
+  {
+    name: 'Crimson Glow',
+    price: '$32',
+    description: 'Vodka, cranberry juice, lime juice, grenadine',
+  },
+];
+
+export function StructuredDataSection() {
+  return (
+    <section
+      className="bg-[#0f100a] text-[#e6e0c6] py-[70px] max-[479px]:py-[60px]"
+      style={{ fontFamily: "'Inter Tight', Arial, sans-serif", fontSize: '20px', fontWeight: 500, lineHeight: '110%' }}
+    >
+      <div
+        className="w-full max-w-[1600px] mx-auto px-6 max-[479px]:px-4"
+      >
+        {/* Title */}
+        <div>
+          <h1
+            className="text-[#e6e0c6] font-medium mt-0 mb-0 leading-[120%] text-[102px] max-[991px]:text-[64px] max-[767px]:text-[52px] max-[479px]:text-[46px]"
+            style={{ fontFamily: "'Inter Tight', Arial, sans-serif" }}
+          >
+            Cocktails
+          </h1>
+        </div>
+
+        {/* Wide Banner Image */}
+        <img
+          src="https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp"
+          loading="lazy"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px"
+          srcSet="https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 500w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 800w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 1080w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 1600w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 2000w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 2600w, https://byqsupply-components.netlify.app/Velvet_Shaker/images/Cocktails_1Cocktails.webp 2768w"
+          alt=""
+          className="w-full mt-8 mb-14 max-[767px]:object-cover max-[767px]:min-h-[120px] max-[479px]:min-h-[52px] max-[479px]:mb-10"
+        />
+
+        {/* Menu Grid */}
+        <div
+          className="grid grid-cols-2 max-[767px]:grid-cols-1"
+          style={{ columnGap: '24px', rowGap: '0px', gridTemplateRows: 'auto' }}
+        >
+          {menuItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col border-t border-[#e6e0c64d] pt-6 pb-10"
+              style={{ gap: '10px' }}
+            >
+              {/* Name + Price Row */}
+              <div className="flex justify-between items-center">
+                <div
+                  className="text-[#e6e0c6] font-medium leading-[110%]"
+                  style={{ fontSize: '26px' }}
+                >
+                  {item.name}
+                </div>
+                <div
+                  className="text-[#e6e0c6] font-medium leading-[110%]"
+                  style={{ fontSize: '26px' }}
+                >
+                  {item.price}
+                </div>
+              </div>
+              {/* Description */}
+              <div
+                className="text-[#e6e0c6] font-medium leading-[110%] mb-0"
+                style={{ fontSize: '18px' }}
+              >
+                {item.description}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default StructuredDataSection;
+```
+
+---
+
+## Setup
+
+
+### npm packages
+No additional packages required — uses only React and Tailwind CSS.
+
+---
+
+## Style adaptation
+Replace these hardcoded values with your project's tokens — keep all layout, spacing, animations, and interactions unchanged:
+
+- **Colors**: `#e6e0c6`, `#0f100a`, `#e6e0c64d` → your project's color tokens
+- **Font**: `Inter Tight` → your project's font stack
+
+---
+
+## Integration steps
+1. Scan 2–3 existing section or page components to understand the project's design conventions (container width, colors, font)
+2. Create the component file at the appropriate location (defaulting to `components/sections/StructuredDataSection.tsx`), rewriting styles to match those conventions — do not use the hardcoded colors, fonts, or container values from the reference above
+3. Complete the Setup steps (fonts, client component note if applicable)
+4. Import and render it on the appropriate page:
+```tsx
+import { StructuredDataSection } from '@/components/sections/StructuredDataSection';
+// <StructuredDataSection />
+```
+5. All images use absolute CDN URLs — no local assets needed
+6. Replace placeholder `href="#"` links with your actual routes
+7. Verify the dev server starts without TypeScript or Tailwind errors
+
+---
+
+## Section details
+
+**LAYOUT & STRUCTURE**
+This is a restaurant menu section with a vertical layout. It contains:
+1. A large heading at the top
+2. A full-width wide banner image below the heading
+3. A 2-column grid of menu items below the image
+
+The grid has 8 menu items arranged in 2 columns × 4 rows. Each menu item card has a top row with name and price (space-between), and a description line below. The dominant visual element is the large cocktail banner image.
+
+**VISUAL DESIGN**
+- Background: #0f100a (very dark near-black with slight green tint)
+- Text colors: #e6e0c6 (warm cream/off-white) for all text
+- Accent/border color: #e6e0c64d (30% opacity cream) for the top border on each menu item
+- Typography: "Inter Tight", Arial, sans-serif
+  - H1: 102px, font-weight 500, line-height 120%
+  - Menu item name/price: 26px, font-weight 500, line-height 110%
+  - Description body: 18px, font-weight 500, line-height 110%
+- Section padding: 70px top and bottom
+- Container: max-width 1600px, padding 24px left/right, centered
+- Grid gap: 24px column gap, 0px row gap
+- Each menu item: border-top 1px solid rgba(230,224,198,0.3), padding-top 24px, padding-bottom 40px, flex column with 10px gap
+- Image: margin-top 32px, margin-bottom 56px, full width
+
+**CONTENT INVENTORY**
+- Heading: "Cocktails"
+- Wide banner image: cocktail glasses close-up photo
+- Menu items (name / price / description):
+  1. Peach Blossom / $32 / Gin, elderflower liqueur, fresh lime juice, lavender syrup
+  2. Lavender Mist / $30 / Gin, lavender syrup, fresh lime juice, soda water
+  3. Mint Cloud / $34 / White rum, fresh mint, lime juice, coconut cream
+  4. Rose Garden / $35 / Gin, rose syrup, grapefruit juice, elderflower liqueur
+  5. Blue Lagoon / $32 / Vodka, blue curaçao, lemonade, lime juice
+  6. Lemon Velvet / $30 / Limoncello, fresh lemon juice, sparkling water, sugar rim
+  7. Sunset Spritz / $40 / Aperol, prosecco, orange juice, soda water
+  8. Crimson Glow / $32 / Vodka, cranberry juice, lime juice, grenadine
+
