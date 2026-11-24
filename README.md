@@ -32,3 +32,16 @@ Página web moderna, elegante y totalmente responsiva para el restaurante **elRe
    ```bash
    npm run preview
    ```
+
+## API de gestión
+
+El backend REST vive en `server/` y usa PostgreSQL con el esquema de `database/sql_todo_junto.sql`.
+
+1. Copia `.env.example` a `.env` y configura `DATABASE_URL`.
+2. Ejecuta el esquema y, si quieres datos iniciales, `database/sql_20261124_seeder.sql`.
+3. Arranca la API:
+   ```bash
+   npm run api
+   ```
+
+Endpoints: `GET /api/health`, `GET /api/dashboard` y CRUD (`GET`, `POST`, `PATCH`, `DELETE`) para las tablas del esquema.

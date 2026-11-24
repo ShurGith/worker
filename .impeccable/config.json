@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "/Users/juanjosegonzalez/WebstormProjects/worker/src/admin/admin.css"
+        ],
+        "createdAt": "2026-11-24T03:33:39.194Z",
+        "reason": "false positive: the side border belongs to the full-height navigation sidebar; metric accents are horizontal inset lines"
+      }
+    ]
+  }
+}
