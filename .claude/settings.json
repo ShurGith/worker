@@ -1,0 +1,7 @@
+{
+  "enabledPlugins": {
+    "show-your-work@iamumeransari": true,
+    "filetree@claude-code-filetree": true,
+    "pstack@pstack-claude": true
+  }
+}

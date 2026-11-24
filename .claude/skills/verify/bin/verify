@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# Verification driver for the elRest site (Vite + React SPA).
+# Usage:
+#   verify start                 -> prints RUN_ID; export it as VERIFY_RUN_ID
+#   verify doctor                -> read-only health check of $VERIFY_RUN_ID
+#   verify url                   -> prints the instance URL
+#   verify browser <args...>     -> agent-browser in this run's isolated session
+#   verify evidence              -> prints (and creates) this run's evidence dir
+#   verify stop                  -> kills only what this run started; keeps evidence
+set -euo pipefail
+
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+STATE_ROOT="${TMPDIR:-/tmp}"
+STATE_ROOT="${STATE_ROOT%/}/elrest-verify"
+RUNS="$STATE_ROOT/runs"
+EVIDENCE="$STATE_ROOT/evidence"
+
+die() { echo "verify: $*" >&2; exit 1; }
+
+need_run() {
+  [[ -n "${VERIFY_RUN_ID:-}" ]] || die "VERIFY_RUN_ID is not set (run 'verify start' first)"
+  RUN_DIR="$RUNS/$VERIFY_RUN_ID"
+  [[ -d "$RUN_DIR" ]] || die "no run state at $RUN_DIR"
+  PID="$(cat "$RUN_DIR/vite.pid")"
+  PORT="$(cat "$RUN_DIR/port")"
+  URL="http://127.0.0.1:$PORT/"
+}
+
+port_free() { ! lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1; }
+
+cmd_start() {
+  [[ -x "$REPO/node_modules/.bin/vite" ]] || (cd "$REPO" && npm ci >/dev/null) || die "npm ci failed"
+  local run_id port
+  run_id="$(date +%Y%m%d-%H%M%S)-$$"
+  port=5300
+  while ! port_free "$port"; do port=$((port + 1)); [[ $port -lt 5400 ]] || die "no free port in 5300-5399"; done
+  local dir="$RUNS/$run_id"
+  mkdir -p "$dir" "$EVIDENCE/$run_id"
+  (cd "$REPO" && nohup node node_modules/vite/bin/vite.js --host 127.0.0.1 --port "$port" --strictPort \
+     >"$dir/vite.log" 2>&1 & echo $! >"$dir/vite.pid")
+  echo "$port" >"$dir/port"
+  for _ in $(seq 1 60); do
+    grep -q "ready in" "$dir/vite.log" 2>/dev/null && break
+    kill -0 "$(cat "$dir/vite.pid")" 2>/dev/null || { cat "$dir/vite.log" >&2; die "vite exited during startup"; }
+    sleep 0.5
+  done
+  grep -q "ready in" "$dir/vite.log" || die "vite not ready after 30s; see $dir/vite.log"
+  echo "$run_id"
+}
+
+cmd_doctor() {
+  need_run
+  local ok=1
+  if kill -0 "$PID" 2>/dev/null; then echo "ok   vite pid $PID alive"; else echo "FAIL vite pid $PID not running"; ok=0; fi
+  local owner
+  owner="$(lsof -nP -t -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | head -1 || true)"
+  if [[ "$owner" == "$PID" ]]; then echo "ok   port $PORT owned by our pid"; else echo "FAIL port $PORT owner is '${owner:-nobody}', expected $PID"; ok=0; fi
+  if curl -fsS "$URL" | grep -q "<title>elRest"; then echo "ok   $URL serves the elRest index.html"; else echo "FAIL $URL does not serve the elRest page"; ok=0; fi
+  if curl -fsS -o /dev/null "${URL}src/main.jsx"; then echo "ok   /src/main.jsx transforms (Vite module graph up)"; else echo "FAIL /src/main.jsx did not transform; see $RUN_DIR/vite.log"; ok=0; fi
+  if grep -qiE "error|failed to resolve" "$RUN_DIR/vite.log"; then echo "WARN vite.log has errors:"; grep -iE "error|failed to resolve" "$RUN_DIR/vite.log" | tail -5; fi
+  echo "url  $URL"
+  echo "evidence $EVIDENCE/$VERIFY_RUN_ID"
+  [[ $ok == 1 ]] || exit 1
+}
+
+cmd_browser() {
+  need_run
+  exec agent-browser --session "elrest-$VERIFY_RUN_ID" "$@"
+}
+
+cmd_stop() {
+  need_run
+  agent-browser --session "elrest-$VERIFY_RUN_ID" close >/dev/null 2>&1 || true
+  if kill -0 "$PID" 2>/dev/null; then
+    kill "$PID"
+    for _ in $(seq 1 20); do kill -0 "$PID" 2>/dev/null || break; sleep 0.25; done
+    kill -0 "$PID" 2>/dev/null && kill -9 "$PID"
+  fi
+  port_free "$PORT" || echo "verify: WARN port $PORT still listening (not ours to kill)" >&2
+  cp "$RUN_DIR/vite.log" "$EVIDENCE/$VERIFY_RUN_ID/vite.log" 2>/dev/null || true
+  rm -rf "$RUN_DIR"
+  echo "stopped run $VERIFY_RUN_ID; evidence kept at $EVIDENCE/$VERIFY_RUN_ID"
+}
+
+case "${1:-}" in
+  start) cmd_start ;;
+  doctor) cmd_doctor ;;
+  url) need_run; echo "$URL" ;;
+  browser) shift; cmd_browser "$@" ;;
+  evidence) need_run; mkdir -p "$EVIDENCE/$VERIFY_RUN_ID"; echo "$EVIDENCE/$VERIFY_RUN_ID" ;;
+  stop) cmd_stop ;;
+  *) sed -n '2,9p' "$0"; exit 2 ;;
+esac
